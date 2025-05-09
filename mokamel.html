@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه مکمل ورزشی | PowerShop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #000000, #E53935);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcccb;
+        }
+        
+        .main-content {
+            min-height: 80vh;
+            padding: 2rem;
+        }
+        
+        .slider {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .slider h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slider p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .btn {
+            background-color: #E53935;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #c62828;
+            transform: translateY(-3px);
+        }
+        
+        .products-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #E53935;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: #E53935;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #333;
+        }
+        
+        .checkout-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+        
+        .checkout-title {
+            text-align: center;
+            color: #E53935;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .checkout-form {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #E53935;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+        }
+        
+        .payment-methods {
+            margin: 2rem 0;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .payment-method input {
+            margin-left: 1rem;
+        }
+        
+        .submit-btn {
+            background-color: #E53935;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c62828;
+            transform: translateY(-2px);
+        }
+        
+        .cart-icon {
+            position: relative;
+            margin-right: 1rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #E53935;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        footer {
+            background-color: #000;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #E53935;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #E53935;
+        }
+        
+        .notification {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        .error {
+            background-color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .slider h1 {
+                font-size: 2rem;
+            }
+            
+            .slider p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">PowerShop</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('home')">خانه</a></li>
+                <li><a href="#" onclick="showSection('products')">محصولات</a></li>
+                <li><a href="#" onclick="showSection('checkout')" class="cart-icon">
+                    سبد خرید <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="#">درباره ما</a></li>
+                <li><a href="#">تماس با ما</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <section id="home-section">
+            <div class="slider">
+                <h1>بهترین مکمل‌های ورزشی را از ما بخواهید</h1>
+                <p>با کیفیت‌ترین محصولات با بهترین قیمت در سراسر کشور</p>
+                <a href="#" class="btn" onclick="showSection('products')">مشاهده محصولات</a>
+            </div>
+            
+            <div class="products-section">
+                <h2 class="section-title">پرفروش‌ترین محصولات</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">پروتئین وی ایزوله</h3>
+                            <p class="product-price">450,000 تومان</p>
+                            <button class="add-to-cart">افزودن به سبد خرید</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">کراتین مونوهیدرات</h3>
+                            <p class="product-price">320,000 تومان</p>
+                            <button class="add-to-cart">افزودن به سبد خرید</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">گینر وزن افزا</h3>
+                            <p class="product-price">380,000 تومان</p>
+                            <button class="add-to-cart">افزودن به سبد خرید</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">پروتئین کازیین</h3>
+                            <p class="product-price">520,000 تومان</p>
+                            <button class="add-to-cart">افزودن به سبد خرید</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="products-section" style="display: none;">
+            <h2 class="section-title">همه محصولات</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">پروتئین وی ایزوله</h3>
+                        <p class="product-price">450,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">کراتین مونوهیدرات</h3>
+                        <p class="product-price">320,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">گینر وزن افزا</h3>
+                        <p class="product-price">380,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">پروتئین کازیین</h3>
+                        <p class="product-price">520,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">BCAA</h3>
+                        <p class="product-price">280,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">پروتئین گیاهی</h3>
+                        <p class="product-price">490,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">پروتئین تخم مرغ</h3>
+                        <p class="product-price">410,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">ویتامین D3</h3>
+                        <p class="product-price">180,000 تومان</p>
+                        <button class="add-to-cart">افزودن به سبد خرید</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="checkout-container" id="checkout-section">
+            <h1 class="checkout-title">تکمیل سفارش</h1>
+            
+            <div id="notification" class="notification"></div>
+            
+            <form class="checkout-form" id="checkout-form">
+                <div class="form-group">
+                    <label for="fullname">نام و نام خانوادگی*</label>
+                    <input type="text" id="fullname" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">شماره تلفن*</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">آدرس کامل*</label>
+                    <textarea id="address" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery-date">تاریخ تحویل*</label>
+                    <input type="date" id="delivery-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery-time">بازه زمانی تحویل*</label>
+                    <select id="delivery-time" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="9-12">9 صبح تا 12 ظهر</option>
+                        <option value="12-15">12 ظهر تا 3 بعدازظهر</option>
+                        <option value="15-18">3 بعدازظهر تا 6 عصر</option>
+                        <option value="18-21">6 عصر تا 9 شب</option>
+                    </select>
+                </div>
+                
+                <div class="payment-methods">
+                    <h3>روش پرداخت*</h3>
+                    
+                    <div class="payment-method">
+                        <input type="radio" id="online-payment" name="payment" value="online" required>
+                        <label for="online-payment">پرداخت آنلاین (درگاه شاپرک)</label>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <input type="radio" id="cash-payment" name="payment" value="cash" required>
+                        <label for="cash-payment">پرداخت در محل</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">تایید و پرداخت</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>درباره ما</h3>
+                <p>فروشگاه PowerSupp با بیش از 10 سال سابقه در زمینه تأمین مکمل‌های ورزشی با کیفیت</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>لینک‌های سریع</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('home')">خانه</a></li>
+                    <li><a href="#" onclick="showSection('products')">محصولات</a></li>
+                    <li><a href="#" onclick="showSection('checkout')">سبد خرید</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <ul>
+                    <li>ساری ، میدان امام ، خیابان نهضت</li>
+                    <li>تلفن : 09020759428</li>
+                    <li>ایمیل: info@powersupp.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // نمایش بخش‌های مختلف
+        function showSection(sectionId) {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('checkout-section').style.display = 'none';
+            
+            if (sectionId === 'home') {
+                document.getElementById('home-section').style.display = 'block';
+            } else if (sectionId === 'products') {
+                document.getElementById('products-section').style.display = 'block';
+            } else if (sectionId === 'checkout') {
+                document.getElementById('checkout-section').style.display = 'block';
+                setDeliveryDate();
+            }
+            
+            return false;
+        }
+        
+        // مدیریت سبد خرید
+        let cartCount = 0;
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCountElement = document.querySelector('.cart-count');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                cartCount++;
+                cartCountElement.textContent = cartCount;
+                showNotification('محصول به سبد خرید اضافه شد!');
+            });
+        });
+        
+        // تنظیم تاریخ تحویل (حداکثر 5 روز آینده)
+        function setDeliveryDate() {
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setDate(today.getDate() + 5);
+            
+            const minDateStr = today.toISOString().split('T')[0];
+            const maxDateStr = maxDate.toISOString().split('T')[0];
+            
+            const dateInput = document.getElementById('delivery-date');
+            dateInput.min = minDateStr;
+            dateInput.max = maxDateStr;
+            dateInput.value = minDateStr;
+        }
+        
+        // نمایش نوتیفیکیشن
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.className = isError ? 'notification error' : 'notification';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+        
+        // مدیریت فرم تسویه حساب
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            
+            if (paymentMethod === 'online') {
+                showNotification('در حال انتقال به درگاه پرداخت شاپرک...');
+                
+                // انتقال به درگاه پرداخت شاپرک (شبیه‌سازی)
+                setTimeout(() => {
+                    window.location.href = 'https://shaparak.ir/payment';
+                }, 2000);
+            } else {
+                showNotification('سفارش با موفقیت ثبت شد. محصول در زمان انتخاب شده تحویل داده خواهد شد.');
+            }
+        });
+        
+        // تنظیم تاریخ هنگام لود صفحه
+        window.onload = function() {
+            setDeliveryDate();
+        };
+    </script>
+</body>
+</html>
